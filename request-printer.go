@@ -12,7 +12,7 @@ const port = ":8080"
 func main() {
 	http.HandleFunc("/", handleRequest)
 
-	log.Printf("telemetry server listening on port %s", port)
+	log.Printf("request printer listening on port %s", port)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
 
