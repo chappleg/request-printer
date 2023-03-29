@@ -1,9 +1,9 @@
-FROM golang:1.15-nanoserver-1809 as builder
+FROM golang:1.20-nanoserver as builder
 WORKDIR /request-printer
-COPY request-printer.go .
+COPY request-printer.go go.mod ./
 RUN go build -ldflags "-s -w"
 
-FROM mcr.microsoft.com/windows/nanoserver:20H2
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2022
 COPY --from=builder /request-printer/request-printer.exe /bin/
 USER ContainerAdministrator
 RUN setx /M path "%path%C:\bin;"

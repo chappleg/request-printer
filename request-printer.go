@@ -5,11 +5,22 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"strconv"
 )
 
-const port = ":80"
-
 func main() {
+	port := ":80"
+
+	if len(os.Args) > 1 {
+		portNumber, err := strconv.Atoi(os.Args[1])
+		if err != nil {
+			log.Fatalf("Invalid port '%s' was provided: %v", os.Args[1], err)
+		}
+
+		port = ":" + strconv.Itoa(portNumber)
+	}
+
 	http.HandleFunc("/", handleRequest)
 
 	log.Printf("request printer listening on port %s", port)

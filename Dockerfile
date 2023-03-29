@@ -1,6 +1,6 @@
-FROM golang:1.15-alpine as builder
+FROM golang:1.20-alpine as builder
 WORKDIR /go/src/github.com/chappleg/request-printer
-COPY request-printer.go .
+COPY request-printer.go go.mod ./
 RUN go build -ldflags "-s -w"
 
 FROM alpine
